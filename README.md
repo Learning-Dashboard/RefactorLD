@@ -2,6 +2,7 @@
 Aquest repositori conté els arxius generats durant el Treball de Final de Grau (TFG). Inclou tant les mètriques desenvolupades com els tests associats, organitzats de manera estructurada per facilitar-ne la comprensió i reutilització.
 
 **Estructura del repositori**
+
 La carpeta _metrics_ conté les mètriques desenvolupades en format .properties i .query. Aquesta carpeta s’organitza en tres subcarpetes:
 - **metriques_incroporades**: Inclou les mètriques noves incorporades durant el TFG.
 - **metriques_modificades**: Conté mètriques existents que han estat modificades i/o redefinides.
