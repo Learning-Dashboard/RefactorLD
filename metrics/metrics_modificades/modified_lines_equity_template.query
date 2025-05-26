@@ -1,0 +1,28 @@
+[
+  {
+    "$match": {
+      "user.login": { "$exists": true, "$ne": null },
+      "stats.total": { "$exists": true }
+    }
+  },
+  {
+    "$group": {
+      "_id": "$user.login",
+      "modifiedLines": { "$sum": "$stats.total" }
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "averageModifiedLines": { "$avg": "$modifiedLines" },
+      "stdDevModifiedLines": { "$stdDevPop": "$modifiedLines" }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "averageModifiedLines": 1,
+      "stdDevModifiedLines": 1
+    }
+  }
+]

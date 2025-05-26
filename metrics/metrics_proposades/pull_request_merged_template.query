@@ -1,0 +1,29 @@
+[
+  {
+    "$match": {
+      "closed_date": { "$exists": true, "$ne": null }
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "totalPRs": { "$sum": 1 },
+      "acceptedPRs": {
+        "$sum": {
+          "$cond": [
+            { "$eq": ["$merged", true] },
+            1,
+            0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "totalPRs": 1,
+      "acceptedPRs": 1
+    }
+  }
+]

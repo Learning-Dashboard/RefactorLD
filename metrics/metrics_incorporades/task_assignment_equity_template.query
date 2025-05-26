@@ -1,0 +1,28 @@
+[
+  {
+    "$match": {
+      "assigned": { "$exists": true, "$ne": null },
+      "milestone_closed": false
+    }
+  },
+  {
+    "$group": {
+      "_id": "$assigned",
+      "tasksCount": { "$sum": 1 }
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "averageTasks": { "$avg": "$tasksCount" },
+      "stdDevTasks": { "$stdDevPop": "$tasksCount" }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "averageTasks": 1,
+      "stdDevTasks": 1
+    }
+  }
+]

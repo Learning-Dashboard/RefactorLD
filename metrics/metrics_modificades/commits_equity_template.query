@@ -1,0 +1,27 @@
+[
+  {
+    "$match": {
+      "user.login": { "$exists": true, "$ne": null }
+    }
+  },
+  {
+    "$group": {
+      "_id": "$user.login",
+      "commitsCount": { "$sum": 1 }
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "averageCommits": { "$avg": "$commitsCount" },
+      "stdDevCommits": { "$stdDevPop": "$commitsCount" }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "averageCommits": 1,
+      "stdDevCommits": 1
+    }
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "$match": {
+      "epic_id": { "$exists": true },
+      "milestone_closed": false
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "totalUserStories": { "$sum": 1 },
+      "storiesWithEpicNull": {
+        "$sum": {
+          "$cond": [ { "$eq": ["$epic_id", null] }, 1, 0 ]
+        }
+      }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "totalUserStories": 1,
+      "storiesWithEpicNull": 1
+    }
+  }
+]

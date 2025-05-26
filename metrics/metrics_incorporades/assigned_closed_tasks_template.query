@@ -1,0 +1,36 @@
+[
+  {
+    "$match": {
+      "is_closed": true,
+      "milestone_closed": false
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "closedTasksTotal": { "$sum": 1 },
+      "closedTasksAssigned": {
+        "$sum": {
+          "$cond": [
+            {
+              "$and": [
+                { "$eq": ["$is_closed", true] },
+                { "$ne": ["$assigned", null] },
+                { "$ne": ["$assigned", ""] }
+              ]
+            },
+            1,
+            0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "closedTasksTotal": 1,
+      "closedTasksAssigned": 1
+    }
+  }
+]

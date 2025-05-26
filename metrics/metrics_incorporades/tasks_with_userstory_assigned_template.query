@@ -1,0 +1,26 @@
+[
+  {
+    "$match": {
+      "user_story_id": { "$exists": true },
+      "milestone_closed": false
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "totalTasks": { "$sum": 1 },
+      "tasksWithUserStoryNull": {
+        "$sum": {
+         "$cond": [ { "$eq": ["$user_story_id", null] }, 1, 0 ]
+        }
+      }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "totalTasks": 1,
+      "tasksWithUserStoryNull": 1
+    }
+  }
+]

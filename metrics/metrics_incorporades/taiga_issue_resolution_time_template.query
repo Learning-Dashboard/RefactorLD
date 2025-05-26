@@ -1,0 +1,47 @@
+[
+  {
+    "$match": {
+      "is_closed": true,
+      "created_date": { "$exists": true, "$ne": null },
+      "finished_date": { "$exists": true, "$ne": null }
+    }
+  },
+  {
+    "$project": {
+      "resolutionTimeDays": {
+        "$divide": [
+          { "$subtract": [
+              { "$toDate": "$finished_date" },
+              { "$toDate": "$created_date" }
+          ]},
+          86400000
+        ]
+      }
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "totalIssues": { "$sum": 1 },
+      "avgResolutionTime": { "$avg": "$resolutionTimeDays" }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "totalIssues": 1,
+      "avgResolutionTime": 1,
+      "normalizedResolutionScore": {
+        "$switch": {
+          "branches": [
+            { "case": { "$lte": ["$avgResolutionTime", 7] }, "then": 1.0 },
+            { "case": { "$and": [ { "$gt": ["$avgResolutionTime", 7] }, { "$lte": ["$avgResolutionTime", 8] } ] }, "then": 0.75 },
+            { "case": { "$and": [ { "$gt": ["$avgResolutionTime", 8] }, { "$lte": ["$avgResolutionTime", 9] } ] }, "then": 0.5 },
+            { "case": { "$and": [ { "$gt": ["$avgResolutionTime", 9] }, { "$lte": ["$avgResolutionTime", 10] } ] }, "then": 0.25 }
+          ],
+          "default": 0.0
+        }
+      }
+    }
+  }
+]

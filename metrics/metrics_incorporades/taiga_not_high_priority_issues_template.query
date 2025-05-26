@@ -1,0 +1,24 @@
+[
+  {
+    "$group": {
+      "_id": null,
+      "issuesTotal": { "$sum": 1 },
+      "issuesHigh": {
+        "$sum": {
+          "$cond": [
+            { "$eq": ["$priority", "High"] },
+            1,
+            0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "issuesTotal": 1,
+      "issuesHigh": 1
+    }
+  }
+]

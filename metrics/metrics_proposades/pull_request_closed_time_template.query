@@ -1,0 +1,45 @@
+[
+  {
+    "$match": {
+      "closed_date": { "$exists": true, "$ne": null },
+      "creation_date": { "$exists": true, "$ne": null }
+    }
+  },
+  {
+    "$project": {
+      "durationDays": {
+        "$divide": [
+          {
+            "$subtract": [
+              { "$toDate": "$closed_date" },
+              { "$toDate": "$creation_date" }
+            ]
+          },
+          1000 * 60 * 60 * 24
+        ]
+      }
+    }
+  },
+  {
+    "$group": {
+      "_id": null,
+      "totalPRs": { "$sum": 1 },
+      "prsOver7Days": {
+        "$sum": {
+          "$cond": [
+            { "$gt": ["$durationDays", 7] },
+            1,
+            0
+          ]
+        }
+      }
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "totalPRs": 1,
+      "prsOver7Days": 1
+    }
+  }
+]

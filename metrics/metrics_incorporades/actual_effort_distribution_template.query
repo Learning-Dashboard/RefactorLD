@@ -1,0 +1,85 @@
+[
+  {
+    "$facet": {
+      "effortStats": [
+        {
+          "$match": {
+            "actual_effort": { "$ne": null },
+            "assigned": { "$ne": null },
+            "milestone_closed": false
+          }
+        },
+        {
+          "$group": {
+            "_id": "$assigned",
+            "effort": { "$sum": "$actual_effort" }
+          }
+        },
+        {
+          "$group": {
+            "_id": null,
+            "averageEffort": { "$avg": "$effort" },
+            "stdDevEffort": { "$stdDevPop": "$effort" }
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "$match": {
+            "milestone_closed": false
+          }
+        },
+        {
+          "$group": {
+            "_id": null,
+            "totalTasks": { "$sum": 1 },
+            "tasksWithEffort": {
+              "$sum": {
+                "$cond": [{ "$ne": ["$actual_effort", null] }, 1, 0]
+              }
+            }
+          }
+        },
+        {
+          "$project": {
+            "tasksWithActualEffort": {
+              "$cond": [
+                { "$eq": ["$totalTasks", 0] },
+                0,
+                { "$divide": ["$tasksWithEffort", "$totalTasks"] }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "$project": {
+      "averageEffort": { "$arrayElemAt": ["$effortStats.averageEffort", 0] },
+      "stdDevEffort": { "$arrayElemAt": ["$effortStats.stdDevEffort", 0] },
+      "tasksWithActualEffort": { "$arrayElemAt": ["$coverage.tasksWithActualEffort", 0] },
+      "finalResult": {
+        "$cond": [
+          {
+            "$or": [
+              { "$lt": [ { "$arrayElemAt": ["$coverage.tasksWithActualEffort", 0] }, 0.75 ] }
+            ]
+          },
+          0,
+          {
+            "$subtract": [
+              1,
+              {
+                "$divide": [
+                  { "$arrayElemAt": ["$effortStats.stdDevEffort", 0] },
+                  { "$arrayElemAt": ["$effortStats.averageEffort", 0] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]
