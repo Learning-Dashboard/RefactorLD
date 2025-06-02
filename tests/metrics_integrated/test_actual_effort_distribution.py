@@ -6,18 +6,20 @@ db = client["test_ld"]
 collection = db["tasks"]
 collection.delete_many({})
 
-def gen_tasks(user, actual_effort, milestone_closed):
-    return [{ "assigned": user, "actual_effort": actual_effort, "milestone_closed": milestone_closed }]
+def gen_tasks(user, actual_effort, milestone_closed, is_closed):
+    return [{ "assigned": user, "actual_effort": actual_effort, "milestone_closed": milestone_closed, "is_closed": is_closed }]
 
 tasks = (
-    gen_tasks("anna", 7, False) +
-    gen_tasks("anna", 3, False) +
-    gen_tasks("carla", 10, False) +
-    gen_tasks("jordi", 5, False) +
-    gen_tasks("jordi", 5, False) +
-    gen_tasks("marc", 15, False) +
-    gen_tasks("marc", None, False) +
-    gen_tasks("anna", 150, True)
+        gen_tasks("anna", 7, False, True) +
+        gen_tasks("anna", 3, False, True) +
+        gen_tasks("carla", 10, False, True) +
+        gen_tasks("jordi", 5, False, True) +
+        gen_tasks("jordi", 5, False, True) +
+        gen_tasks("marc", 15, False, True) +
+        gen_tasks("marc", None, False, True) +
+        gen_tasks("anna", 150, True, True) +
+        gen_tasks("anna", 50, False, False) +
+        gen_tasks("carla", 20, False, False)
 )
 
 collection.insert_many(tasks)
@@ -36,6 +38,7 @@ pipeline = [
                     "$match": {
                         "actual_effort": { "$ne": None },
                         "assigned": { "$ne": None },
+                        "is_closed": True,
                         "milestone_closed": False
                     }
                 },
@@ -56,6 +59,7 @@ pipeline = [
             "coverage": [
                 {
                     "$match": {
+                        "is_closed": True,
                         "milestone_closed": False
                     }
                 },

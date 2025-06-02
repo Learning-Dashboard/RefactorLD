@@ -6,6 +6,7 @@
           "$match": {
             "actual_effort": { "$ne": null },
             "assigned": { "$ne": null },
+            "is_closed": true,
             "milestone_closed": false
           }
         },
@@ -26,6 +27,7 @@
       "coverage": [
         {
           "$match": {
+            "is_closed": true,
             "milestone_closed": false
           }
         },
