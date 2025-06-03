@@ -33,7 +33,7 @@ pipeline = [
     {
         "$project": {
             "user": "$user.login",
-            "cappedLines": {
+            "maxLines": {
                 "$cond": [
                     { "$gt": ["$stats.total", 300] },
                     300,
@@ -45,7 +45,7 @@ pipeline = [
     {
         "$group": {
             "_id": "$user",
-            "modifiedLines": { "$sum": "$cappedLines" }
+            "modifiedLines": { "$sum": "$maxLines" }
         }
     },
     {
