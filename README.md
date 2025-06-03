@@ -3,10 +3,11 @@ Aquest repositori conté els arxius generats durant el Treball de Final de Grau 
 
 **Estructura del repositori**
 
-La carpeta _metrics_ conté les mètriques desenvolupades en format .properties i .query. Aquesta carpeta s’organitza en tres subcarpetes:
-- **metriques_incroporades**: Inclou les mètriques noves incorporades durant el TFG.
-- **metriques_modificades**: Conté mètriques existents que han estat modificades i/o redefinides.
-- **metriques_proposades**: Agrupa les mètriques proposades per a desenvolupaments futurs.
+La carpeta _metrics_ conté les mètriques desenvolupades en format .properties i .query, a més dels arxius de les metriques existents que es mantenen. Aquesta carpeta s’organitza en quatre subcarpetes:
+- **metrics_existing**: Agrupa les mètriques que ja existien prèviament.
+- **metrics_integrated**: Inclou les mètriques noves incorporades durant el TFG.
+- **metrics_modified**: Conté mètriques existents que han estat modificades i/o redefinides.
+- **metrics_proposed**: Agrupa les mètriques proposades per a desenvolupaments futurs.
 
 La carpeta _tests_ inclou els tests en Python realitzats per validar les mètriques. Aquesta carpeta està subdividida segons la naturalesa de les mètriques:
 - **metrics_integrated**: Tests de les mètriques incorporades.

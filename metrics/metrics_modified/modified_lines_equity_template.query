@@ -6,9 +6,21 @@
     }
   },
   {
+    "$project": {
+      "user": "$user.login",
+      "maxLines": {
+        "$cond": [
+          { "$gt": ["$stats.total", 300] },
+          300,
+          "$stats.total"
+        ]
+      }
+    }
+  },
+  {
     "$group": {
-      "_id": "$user.login",
-      "modifiedLines": { "$sum": "$stats.total" }
+      "_id": "$user",
+      "modifiedLines": { "$sum": "$maxLines" }
     }
   },
   {

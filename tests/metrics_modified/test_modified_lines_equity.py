@@ -13,9 +13,12 @@ collection.insert_many([
     { "user": { "login": "marc" }, "stats": { "total": 100 } },
     { "user": { "login": "laia" }, "stats": { "total": 50 } },
     { "user": { "login": "laia" }, "stats": { "total": 50 } },
+    { "user": { "login": "anna" }, "stats": { "total": 700 } }, # conta 300
+    { "user": { "login": "laia" }, "stats": { "total": 500 } }, # conta 300
+    { "user": { "login": "marc" }, "stats": { "total": 300 } },
 ])
 
-modified_lines_per_user = [200, 100, 100]
+modified_lines_per_user = [500, 400, 400]
 expected_avg = sum(modified_lines_per_user) / len(modified_lines_per_user)
 expected_stddev = math.sqrt(sum((x - expected_avg)**2 for x in modified_lines_per_user) / len(modified_lines_per_user))
 expected_metric = 1 - (expected_stddev / expected_avg)
@@ -28,9 +31,21 @@ pipeline = [
         }
     },
     {
+        "$project": {
+            "user": "$user.login",
+            "cappedLines": {
+                "$cond": [
+                    { "$gt": ["$stats.total", 300] },
+                    300,
+                    "$stats.total"
+                ]
+            }
+        }
+    },
+    {
         "$group": {
-            "_id": "$user.login",
-            "modifiedLines": { "$sum": "$stats.total" }
+            "_id": "$user",
+            "modifiedLines": { "$sum": "$cappedLines" }
         }
     },
     {
