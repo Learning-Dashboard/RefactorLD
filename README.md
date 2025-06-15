@@ -13,3 +13,8 @@ La carpeta _tests_ inclou els tests en Python realitzats per validar les mètriq
 - **metrics_integrated**: Tests de les mètriques incorporades.
 - **metrics_modified**: Tests corresponents a mètriques existents que han estat modificades i/o redefinides.
 - **metrics_proposed**: Tests de mètriques proposades encara no implementades definitivament.
+
+A més, s'inclouen tres fitxers en format .txt que recullen:
+- **categories.txt**: inclou les categories de les mètriques i dels factors
+- **factors.txt**: recull la informació detallada dels factors de qualitat, incloent-hi el seu nom, descripció, les mètriques que els componen i la categoria assignada.
+- **strategic_indicator.txt**: proporciona la informació relativa als indicadors estratègics, especificant-ne el nom, la descripció i els factors de qualitat que els conformen.

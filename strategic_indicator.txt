@@ -1,0 +1,15 @@
+Strategic Indicator 1: Code Contributions
+Description: Assesses coding practices by evaluating whether team members are committing code within regular working hours, promoting time management and planning.
+Factors included: Commits Within Schedule
+
+Strategic Indicator 2: Issue Management Effectiveness
+Description: Measures how efficiently the team manages issues in Taiga, including resolution times and the use of appropriate prioritization levels.
+Factors included: Taiga Issue Management
+
+Strategic Indicator 3: Project and Task Management Quality
+Description: Evaluates the overall quality of project and task management, including task completion, structural linking, user story definition, and effort data accuracy.
+Factors included: Fulfillment of Tasks, Project Structure Quality, User Stories Definition Quality, Tasks Effort Information, Task Closure Responsibility
+
+Strategic Indicator 4: Responsibility and Fairness in Work Distribution
+Description: Evaluates whether workload and responsibilities are fairly shared among team members and if all tasks and contributions have a clearly identified author.
+Factors included: Workload Distribution Fairness, Author Attribution

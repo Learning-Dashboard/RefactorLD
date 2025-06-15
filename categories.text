@@ -1,0 +1,25 @@
+CATEGORIES DE METRIQUES
+Category 1
+Llindars: 70 - 85 - 100
+Metriques associades: acceptance_criteria_check, actual_effort_distribution, closed_tasks_with_AE, commits_equity, deviation_effort_estimation_simple, modified_lines_equity, task_assignment_equity, tasks_with_EE, pattern_check
+
+Category 2
+Llindars: 80 - 90 - 100
+Metriques associades: assigned_closed_tasks, assigned_tasks, commits_taskreference, valid_user_commits, closedtasks, tasks_with_userstory_assigned, userstories_with_epic_assigned
+
+Category 3
+Llindars: 65 - 85 - 100
+Metriques associades: commits_schedule, taiga_issue_resolution_time, taiga_not_high_priority_issues
+
+CATEGORIES DE FACTORS
+Category 1
+Llindars: 70 - 85 - 100
+Factors associats: Task Effort Information, User Stories Definition Quality, Workload Distribution Fairness
+
+Category 2
+Llindars: 80 - 90 - 100
+Factors associats: Author Attribution, Fulfillment of Tasks, Project Structure Quality, Task Closure Responsibility
+
+Category 3
+Llindars: 65 - 85 - 100
+Factors associats: Commits Within Schedule, Taiga Issue Management

@@ -1,0 +1,44 @@
+Factor 1: Author Attribution
+Description: Groups the metrics that ensure every commit in the project and tasks in the sprint has an explicitly assigned author.
+Metrics included: assigned_tasks, valid_user_commits
+Category: 2
+
+Factor 2: Commits Within Schedule
+Description: Groups the metrics that assess the time distribution of team members when committing.
+Metrics included: commits_schedule
+Category: 3
+
+Factor 3: Fulfillment of Tasks
+Description: Groups the metrics that measure the percentage of closed tasks made by a student with respect to the total number of tasks assigned to this student.
+Metrics included: closedtasks
+Category: 2
+
+Factor 4: Project Structure Quality
+Description: Measures the structural consistency of the project by ensuring that user stories and tasks are properly linked, and that commits are correctly associated with their corresponding tasks.
+Metrics included: commits_taskreference, tasks_with_userstory_assigned, userstories_with_epic_assigned
+Category: 2
+
+Factor 5: Taiga Issue Management
+Description: Groups the metrics that evaluate how teams manage Taiga issues, including the time to resolve them and the proportion of issues with a priority other than “High”.
+Metrics included: taiga_issue_resolution_time, taiga_not_high_priority_issues
+Category: 3
+
+Factor 6: Task Closure Responsibility
+Description: Groups the metrics that ensure every closed task has a responsible team member assigned.
+Metrics included: assigned_closed_tasks
+Category: 2
+
+Factor 7: Tasks Effort Information
+Description: Groups the metrics that capture the completeness and accuracy of task effort data, including the presence of estimated effort, actual effort, and the proportion of well-estimated tasks.
+Metrics included: closed_tasks_with_AE, deviation_effort_estimation_simple, tasks_with_EE
+Category: 1
+
+Factor 8: User Stories Definition Quality
+Description: Groups the metrics that measure the quality of user stories through the definition of acceptance criteria and the use of the specific pattern.
+Metrics included: acceptance_criteria_check, pattern_check
+Category: 1
+
+Factor 9: Workload Distribution Fairness
+Description: Evaluates how fairly work is distributed among team members.
+Metrics included: actual_effort_distribution, commits_equity, modified_lines_equity, task_assignment_equity
+Category: 1
